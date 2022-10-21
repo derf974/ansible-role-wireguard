@@ -1,6 +1,7 @@
 ---
 - name: Converge
   hosts: all
+  become: yes
   tasks:
     - name: "Include acme.ansible_role_wireguard"
       include_role:

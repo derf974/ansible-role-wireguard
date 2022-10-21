@@ -1,5 +1,20 @@
 ---
 # tasks file for ansible_role_wireguard
-- name: "HelloWorld"
-  ansible.builtin.debug:
-    msg: "Hello World"
+- name: "Install wireguard apk"
+  community.general.apk:
+    name: wireguard-tools
+    state: present
+    update_cache: true
+
+- name: "Generate private key"
+  ansible.builtin.shell:
+      cmd: "wg genkey > private"
+      creates: "private"
+
+- name: "Add wireguard interface"
+  ansible.builtin.shell:
+      cmd: "ip link add wg0 type wireguard"
+
+- name: "Add wireguard ip address"
+  ansible.builtin.shell:
+      cmd: "ip addr add 10.0.0.1/24 dev wg0"
