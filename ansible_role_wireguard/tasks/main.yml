@@ -1,0 +1,5 @@
+---
+# tasks file for ansible_role_wireguard
+- name: "HelloWorld"
+  ansible.builtin.debug:
+    msg: "Hello World"
